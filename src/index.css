@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*,
+*::before,
+*::after {
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	background-color: var(--color-yellow);
+	font-family: var(--font-family);
+	font-weight: normal;
+	color: var(--color-black);
+}
+
+/* @font-face {
+	font-family: 'bananaslip_plusplus';
+	src: url('fonts/bananaslipplus-webfont.woff2') format('woff2'),
+		url('fonts/bananaslipplus-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+} */
+
+:root {
+	background-color: var(--color-yellow);
+	/* --font-family: 'bananaslip_plusplus', 'Arvo', serif; */
+	--font-family: 'Roboto', sans-serif;
+	--color-yellow: rgb(253, 200, 0);
+	--color-white: rgb(255, 255, 254);
+	--color-white-transparent: rgba(255, 255, 255, 0.2);
+	--color-black: rgb(1, 0, 0);
+	--color-gray: rgb(200, 200, 200);
+	--color-gray-transparent: rgba(0, 0, 0, 0.6);
+	--color-transparent: rgba(0, 0, 0, 0.04);
+	--color-beige: rgb(255, 236, 177);
+}
+
+/* website layout*/
+#root {
+	background-color: var(--color-yellow);
+}
+/* #root {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; 
+	width: 100%;
+	height: 100%;
+} */
+
+/* .App {
+	height: 100vh;
+} */
+
+.nav-style {
+	color: var(--color-white);
+	text-decoration: none;
+}
+
+.nav-style:hover {
+	color: var(--color-white);
+}
+
+.special_modal .modal-content {
+	background-color: var(--color-white);
+	border-radius: 25px;
+	border: none;
+	filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
+	font-size: 0.8rem;
+}
