@@ -273,7 +273,14 @@ const PinDetail = ({ match }) => {
 			>
 				<Modal.Body>You must log in to access this functionality.</Modal.Body>
 				<Modal.Footer>
-					<Button className="special_modal_button">
+					<Button
+						style={{
+							backgroundColor: `var(--color-black)`,
+							color: `var(--color-white)`,
+							borderRadius: '25px',
+							border: 'none',
+						}}
+					>
 						<Link to="/login" className="nav-style">
 							Log In
 						</Link>
