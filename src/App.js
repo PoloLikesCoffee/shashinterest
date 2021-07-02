@@ -6,7 +6,7 @@ import MyPage from './components/shashinterest/MyPage';
 import PinUserDetail from './components/shashinterest/PinUserDetail';
 import Explore from './components/shashinterest/Explore';
 import History from './components/shashinterest/History';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './contexts/AuthContext';
 import Signup from './components/authentication/Signup';
@@ -72,7 +72,7 @@ const App = () => {
 	}, []);
 
 	return (
-		<Router>
+		<Router basename="/">
 			<AuthProvider>
 				<Nav searchSubmit={searchSubmit} />
 				<Switch>
@@ -101,7 +101,7 @@ const App = () => {
 					<Route exact path="/mypage/:id" component={PinUserDetail} />
 
 					{/* Pin page */}
-					<Route path="/:id" component={PinDetail} />
+					<Route exact path="/:id" component={PinDetail} />
 				</Switch>
 			</AuthProvider>
 		</Router>
