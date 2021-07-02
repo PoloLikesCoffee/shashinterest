@@ -11,6 +11,33 @@ export function useHistorySearch() {
 			.where('userId', '==', currentUser.uid)
 			.orderBy('createdAt');
 
+		// delete history before last 12 hours
+
+		// let yesterday = database.yesterday;
+		// yesterday.seconds = yesterday.seconds - 24 * 60 * 60;
+		let lastTwelveHours = database.yesterday;
+		lastTwelveHours.seconds = lastTwelveHours.seconds - 12 * 60 * 60;
+		// query
+		// 	.where('createdAt', '>', lastTwelveHours)
+		// 	.get()
+		// 	.then(function (querySnapshote) {
+		// 		querySnapshote.forEach(function (doc) {
+		// 			console.log(doc.id, ' => ', doc.data());
+		// 		});
+		// 	})
+		// 	.catch(function (error) {
+		// 		console.log('Error getting documents: ', error);
+		// 	});
+
+		query
+			.where('createdAt', '<', lastTwelveHours)
+			.get()
+			.then(function (querySnapshote) {
+				querySnapshote.forEach((element) => {
+					element.ref.delete();
+				});
+			});
+
 		const unsub = query.onSnapshot((snap) => {
 			const documents = snap.docs.map((doc) => {
 				return {

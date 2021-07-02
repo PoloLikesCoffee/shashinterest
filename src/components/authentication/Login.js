@@ -11,14 +11,21 @@ const Login = () => {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const history = useHistory();
+	const [didMount, setDidMount] = useState(false);
 
 	// Remove console error
 	useEffect(() => {
+		setDidMount(true);
 		return () => {
-			setLoading(false);
-			setError('');
+			setDidMount(false);
+			// setLoading(false);
+			// setError('');
 		};
-	});
+	}, []);
+
+	if (!didMount) {
+		return null;
+	}
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();

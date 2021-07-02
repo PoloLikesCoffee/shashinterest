@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 import Pin from './Pin';
-import './Mainboard.css';
+import './Homeboard.css';
 
-const Mainboard = ({ pins }) => {
+const Homeboard = ({ pins }) => {
 	return (
 		<Wrapper>
-			<Container className="mainboard__container">
+			<Container className="board__container">
 				{pins.map((pin) => {
 					return (
 						<Pin
@@ -26,7 +26,7 @@ const Mainboard = ({ pins }) => {
 	);
 };
 
-export default Mainboard;
+export default Homeboard;
 
 const Wrapper = styled.div`
 	display: flex;

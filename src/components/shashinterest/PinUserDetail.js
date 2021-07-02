@@ -6,8 +6,22 @@ import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 const PinDetail = ({ match, history }) => {
 	const name = history.location.state.name;
 	const alt = history.location.state.alt;
-	const url = history.location.state.url;
+	const url = history.location.state.url.trueUrl;
+	const defaultUrl = history.location.state.url.defaultUrl;
+	const link = history.location.state.link.trueLink;
+	const defaultLink = history.location.state.link.defaultLink;
 	const description = history.location.state.description;
+
+	const trimLink = (string) => {
+		if (string) {
+			let trimmedLink = string.substring(8, 20);
+			return trimmedLink;
+		} else {
+			// console.log('no string');
+			// return (string = 'Default Link');
+			return;
+		}
+	};
 
 	const showDescription = () => {
 		if (!description && alt) {
@@ -19,20 +33,28 @@ const PinDetail = ({ match, history }) => {
 		}
 	};
 
-	console.log(alt);
-	console.log(description);
+	const addDefaultSrc = (event) => {
+		event.target.src = defaultUrl;
+		const aGo = event.target.parentNode
+			.querySelector('.go-to-url')
+			.querySelector('a');
+		const aZoom = event.target.parentNode
+			.querySelector('.zoom')
+			.querySelector('a');
+		aGo.href = defaultLink;
+		aGo.innerText = trimLink(defaultLink);
+		aZoom.href = defaultUrl;
+	};
 
 	return (
 		<Wrapper>
 			<ImageWrapper>
 				<Image>
-					<img src={url} alt={alt} />
-
+					<img onError={addDefaultSrc} src={url} alt={alt} />
 					<div className="go-to-url">
 						<CallMadeIcon />
-						<a href={url}>Link of the shashin</a>
+						<a href={link}>{trimLink(link)}</a>
 					</div>
-
 					<div className="btn-img zoom">
 						<a href={url}>
 							<ZoomOutMapIcon />
@@ -98,12 +120,15 @@ const Image = styled.div`
 	}
 
 	img {
-		opacity: 1;
 		display: flex;
 		width: 100%;
 		cursor: pointer;
 		border-radius: 16px;
 		object-fit: cover;
+	}
+
+	.go-to-url .MuiSvgIcon-root {
+		margin-right: 0.2rem;
 	}
 
 	.zoom .MuiSvgIcon-root {
@@ -142,7 +167,7 @@ const Image = styled.div`
 	}
 
 	:hover > img {
-		opacity: 0.9;
+		filter: brightness(60%);
 	}
 
 	:hover > .go-to-url {

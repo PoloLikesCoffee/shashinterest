@@ -25,7 +25,7 @@ const Pin = ({ urls, alt, photographer, link, id, description }) => {
 	};
 
 	const trimLink = (string) => {
-		let trimmedLink = string.substring(8, 28) + '...';
+		let trimmedLink = string.substring(8, 20) + '...';
 		return trimmedLink;
 	};
 
@@ -67,13 +67,11 @@ const Pin = ({ urls, alt, photographer, link, id, description }) => {
 			let dataPhotographer = event.target.getAttribute('data-photographer');
 			let dataUrl = event.target.getAttribute('data-url');
 			let dataAlt = event.target.getAttribute('data-alt');
+			let dataLink = event.target.getAttribute('data-link');
 			let dataId = event.target.getAttribute('data-id');
 			let dataDescription = event.target.getAttribute('data-description');
 			// check if pin already exist in database of current user or save img in the database
 			database.images
-				// .where('name', '==', dataPhotographer)
-				// .where('userId', '==', currentUser.uid)
-				// .where('url', '==', dataUrl)
 				.where('id', '==', dataId)
 				.where('userId', '==', currentUser.uid)
 				.where('name', '==', dataPhotographer)
@@ -84,7 +82,6 @@ const Pin = ({ urls, alt, photographer, link, id, description }) => {
 						// console.log('already exist');
 						openModalExist();
 						return;
-						// existingImg.ref.update({ url: dataUrl, name: dataPhotographer });
 					} else {
 						if (!dataPhotographer || !dataUrl || !dataId) {
 							// console.log('there is no data from this pin');
@@ -97,6 +94,7 @@ const Pin = ({ urls, alt, photographer, link, id, description }) => {
 								description: dataAlt,
 								mainDescription: dataDescription,
 								url: dataUrl,
+								link: dataLink,
 								userId: currentUser.uid,
 								createdAt: database.getCurrentTimestamp(),
 							});
@@ -118,7 +116,7 @@ const Pin = ({ urls, alt, photographer, link, id, description }) => {
 					onClick={handleSave}
 					data-photographer={photographer}
 					data-url={urls.regular}
-					// data-link={link}
+					data-link={link}
 					data-alt={alt}
 					data-description={description}
 					data-id={id}
@@ -280,14 +278,12 @@ const Container = styled.div`
 	}
 
 	img {
-		opacity: 1;
 		display: flex;
 		width: 100%;
 		cursor: zoom-in;
 		cursor: pointer;
 		border-radius: 16px;
 		object-fit: cover;
-		filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
 	}
 
 	.open {
@@ -327,14 +323,14 @@ const Container = styled.div`
 	}
 
 	:hover > img {
-		opacity: 0.7;
+		filter: brightness(60%) drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
 	}
 
 	:hover > .open {
 		opacity: 1;
 	}
 
-	:hover > .go-to-url {
+	.go-to-url:hover {
 		opacity: 1;
 	}
 `;

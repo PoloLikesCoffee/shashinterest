@@ -16,6 +16,7 @@ const firestore = app.firestore();
 export const database = {
 	images: firestore.collection('images'),
 	historySearch: firestore.collection('history'),
+	yesterday: firebase.firestore.Timestamp.now(),
 	getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
 };
 

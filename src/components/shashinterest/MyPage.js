@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button, Modal } from 'react-bootstrap';
-import PinUser from './PinUser';
 import { useImage } from '../../hooks/useImage';
-import './Mainboard.css';
 import { database } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import PinUser from './PinUser';
+import './Homeboard.css';
 
 const MyPage = () => {
 	const images = useImage();
-
 	const { currentUser } = useAuth();
 	const [openDelete, setOpenDelete] = useState(false);
 	const [openError, setOpenError] = useState(false);
@@ -56,7 +55,7 @@ const MyPage = () => {
 	return (
 		<Wrapper>
 			{images && images.length > 0 && (
-				<Container className="mainboard__container">
+				<Container className="board__container">
 					{images.map((img) => (
 						<div key={img.id}>
 							<PinUser
@@ -66,7 +65,7 @@ const MyPage = () => {
 								alt={img.description}
 								name={img.name}
 								description={img.mainDescription}
-								link={img.url}
+								link={img.link}
 								handleDelete={handleDelete}
 							/>
 						</div>

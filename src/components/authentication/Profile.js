@@ -8,13 +8,20 @@ const Profile = () => {
 	const [error, setError] = useState('');
 	const { currentUser, logout } = useAuth();
 	const { history } = useHistory();
+	const [didMount, setDidMount] = useState(false);
 
 	// Remove console error
 	useEffect(() => {
+		setDidMount(true);
 		return () => {
-			setError('');
+			setDidMount(false);
+			// setError('');
 		};
-	});
+	}, []);
+
+	if (!didMount) {
+		return null;
+	}
 
 	const handleLogOut = async () => {
 		setError('');

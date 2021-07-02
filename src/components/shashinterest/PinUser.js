@@ -5,6 +5,11 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { Link } from 'react-router-dom';
 
 const PinUser = ({ url, alt, name, link, id, handleDelete, description }) => {
+	const defaultSrc =
+		'https://images.unsplash.com/photo-1557683316-973673baf926?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80';
+
+	const defaultLink = 'https://unsplash.com/photos/pJadQetzTkI';
+
 	const trimString = (string) => {
 		if (string) {
 			let length = 20;
@@ -23,7 +28,7 @@ const PinUser = ({ url, alt, name, link, id, handleDelete, description }) => {
 
 	const trimLink = (string) => {
 		if (string) {
-			let trimmedLink = string.substring(8, 28) + '...';
+			let trimmedLink = string.substring(8, 20) + '...';
 			return trimmedLink;
 		} else {
 			// console.log('no string');
@@ -33,8 +38,12 @@ const PinUser = ({ url, alt, name, link, id, handleDelete, description }) => {
 	};
 
 	const addDefaultSrc = (event) => {
-		event.target.src =
-			'https://images.unsplash.com/photo-1557683316-973673baf926?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80';
+		event.target.src = defaultSrc;
+		const aHref = event.target.parentNode
+			.querySelector('.go-to-url')
+			.querySelector('a');
+		aHref.href = defaultLink;
+		aHref.innerText = trimLink(defaultLink);
 	};
 
 	return (
@@ -54,12 +63,12 @@ const PinUser = ({ url, alt, name, link, id, handleDelete, description }) => {
 				</div>
 				<img onError={addDefaultSrc} src={url} alt={alt} />
 				<div className="open">
-					{/* <Link to={`/mypage/${id}`}>Open</Link> */}
 					<Link
 						to={{
 							pathname: `/mypage/${id}`,
 							state: {
-								url: url,
+								url: { trueUrl: url, defaultUrl: defaultSrc },
+								link: { trueLink: link, defaultLink: defaultLink },
 								alt: alt,
 								name: name,
 								description: description,
@@ -118,16 +127,11 @@ const Container = styled.div`
 	}
 
 	img {
-		opacity: 1;
 		display: flex;
 		width: 100%;
 		cursor: pointer;
 		border-radius: 16px;
-		// border-radius: 6px;
-		// border: 4px solid var(--color-black);
 		object-fit: cover;
-		filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
-		// filter: grayscale(100%) drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
 	}
 
 	.open {
@@ -167,14 +171,14 @@ const Container = styled.div`
 	}
 
 	:hover > img {
-		opacity: 0.7;
+		filter: brightness(60%) drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
 	}
 
 	:hover > .open {
 		opacity: 1;
 	}
 
-	:hover > .go-to-url {
+	.go-to-url:hover {
 		opacity: 1;
 	}
 `;

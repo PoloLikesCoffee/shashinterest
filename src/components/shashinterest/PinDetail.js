@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import uniqid from 'uniqid';
 import { Button, Modal } from 'react-bootstrap';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
-import { database } from '../../firebase';
-import { useAuth } from '../../contexts/AuthContext';
-import { Link } from 'react-router-dom';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { database } from '../../firebase';
+import { useAuth } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
+import uniqid from 'uniqid';
 
 const PinDetail = ({ match }) => {
 	useEffect(() => {
@@ -45,8 +45,6 @@ const PinDetail = ({ match }) => {
 		);
 		const pin = await fetchPin.json();
 		setPin(pin);
-		// console.log(pin);
-		// console.log(pin.links.html);
 	};
 
 	const openModalExist = () => {
@@ -142,7 +140,6 @@ const PinDetail = ({ match }) => {
 						onClick={handleSave}
 						data-photographer={pin.user?.name}
 						data-url={pin.urls?.regular}
-						// data-link={link}
 						data-alt={pin.alt_description}
 						data-description={pin.description}
 						data-id={pin.id}
@@ -399,7 +396,6 @@ const Image = styled.div`
 	}
 
 	img {
-		opacity: 1;
 		display: flex;
 		width: 100%;
 		cursor: pointer;
@@ -414,6 +410,10 @@ const Image = styled.div`
 
 	.zoom .MuiSvgIcon-root {
 		font-size: 1.7rem;
+	}
+
+	.go-to-url .MuiSvgIcon-root {
+		margin-right: 0.2rem;
 	}
 
 	.go-to-url {
@@ -452,7 +452,7 @@ const Image = styled.div`
 	}
 
 	:hover > img {
-		opacity: 0.9;
+		filter: brightness(60%);
 	}
 
 	:hover > .go-to-url {

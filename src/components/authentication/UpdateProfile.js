@@ -12,14 +12,21 @@ const UpdateProfile = () => {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const history = useHistory();
+	const [didMount, setDidMount] = useState(false);
 
 	// Remove console error
 	useEffect(() => {
+		setDidMount(true);
 		return () => {
-			setLoading(false);
-			setError('');
+			setDidMount(false);
+			// setLoading(false);
+			// setError('');
 		};
-	});
+	}, []);
+
+	if (!didMount) {
+		return null;
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -89,7 +96,7 @@ const UpdateProfile = () => {
 							<Form.Control
 								type="password"
 								ref={passwordRef}
-								placeholder="Leave blank to keep the same"
+								placeholder="Leave it empty to keep the same password..."
 							/>
 						</Form.Group>
 						<Form.Group id="password-confirm">
@@ -97,7 +104,7 @@ const UpdateProfile = () => {
 							<Form.Control
 								type="password"
 								ref={passwordConfirmRef}
-								placeholder="Leave blank to keep the same"
+								placeholder="Leave it empty to keep the same password..."
 							/>
 						</Form.Group>
 						<Button

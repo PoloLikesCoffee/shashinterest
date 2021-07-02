@@ -42,7 +42,6 @@ const Nav = ({ searchSubmit }) => {
 			.get()
 			.then((history) => {
 				const historyItem = history.docs[0];
-				// console.log(history.docs);
 				if (historyItem) {
 					// console.log('already exist');
 					return;
@@ -61,14 +60,13 @@ const Nav = ({ searchSubmit }) => {
 		history.push('/');
 		searchSubmit(searchInput);
 		if (currentUser) {
-			// load history user search array
+			// push in history user search database
 			pushInDatabase(searchInput.toLowerCase());
+			setSearchInput('');
 		} else {
-			// load default search array
+			setSearchInput('');
 			return;
 		}
-		setSearchInput('');
-		// console.log(searchInput);
 	};
 
 	const openModal = () => {
@@ -96,11 +94,12 @@ const Nav = ({ searchSubmit }) => {
 	const handleSubmitNewPin = (event) => {
 		event.preventDefault();
 
-		// create an img in the database
+		// create an new img in the database
 		database.images.add({
 			id: uniqid(),
 			name: name,
 			description: description,
+			link: url,
 			url: url,
 			userId: currentUser.uid,
 			createdAt: database.getCurrentTimestamp(),
@@ -113,10 +112,10 @@ const Nav = ({ searchSubmit }) => {
 
 	return (
 		<Wrapper ref={ref}>
-			<LogoWrapper>
+			<LogoProjectWrapper>
 				<PhotoLibraryIcon />
 				Shashinterest
-			</LogoWrapper>
+			</LogoProjectWrapper>
 
 			<Buttons>
 				<Link className="nav-style" to="/">
@@ -165,7 +164,6 @@ const Nav = ({ searchSubmit }) => {
 
 				<Link className="nav-style" to="/user">
 					<IconButton>
-						{/* <FaceIcon /> */}
 						<AccountCircleIcon />
 					</IconButton>
 				</Link>
@@ -215,7 +213,9 @@ const Nav = ({ searchSubmit }) => {
 							/>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label className="mt-4">URL of the photo: </Form.Label>
+							<Form.Label className="mt-4">
+								URL of the photo: (Must be a valid url)
+							</Form.Label>
 							<Form.Control
 								type="text"
 								required
@@ -259,7 +259,14 @@ const Nav = ({ searchSubmit }) => {
 			>
 				<Modal.Body>You must log in to access this functionality.</Modal.Body>
 				<Modal.Footer>
-					<Button className="special_modal_button">
+					<Button
+						style={{
+							backgroundColor: `var(--color-black)`,
+							color: `var(--color-white)`,
+							borderRadius: '25px',
+							border: 'none',
+						}}
+					>
 						<Link to="/login" className="nav-style">
 							Log In
 						</Link>
@@ -283,12 +290,12 @@ const Nav = ({ searchSubmit }) => {
 				placement="bottom"
 				container={ref.current}
 				containerPadding={20}
+				transition={false}
 			>
 				<Popover
 					id="popover-contained"
 					style={{
 						backgroundColor: `var(--color-white)`,
-
 						color: `var(--color-black)`,
 						borderRadius: '25px',
 					}}
@@ -338,7 +345,7 @@ const Wrapper = styled.div`
 	}
 `;
 
-const LogoWrapper = styled.div`
+const LogoProjectWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	color: var(--color-white);

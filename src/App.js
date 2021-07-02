@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Nav from './components/shashinterest/Nav';
-import Mainboard from './components/shashinterest/Mainboard';
-import Explore from './components/shashinterest/Explore';
+import Homeboard from './components/shashinterest/Homeboard';
+import PinDetail from './components/shashinterest/PinDetail';
 import MyPage from './components/shashinterest/MyPage';
+import PinUserDetail from './components/shashinterest/PinUserDetail';
+import Explore from './components/shashinterest/Explore';
 import History from './components/shashinterest/History';
-import Signup from './components/authentication/Signup';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './contexts/AuthContext';
+import Signup from './components/authentication/Signup';
 import Profile from './components/authentication/Profile';
 import Login from './components/authentication/Login';
 import PrivateRoute from './components/authentication/PrivateRoute';
 import ForgotPassword from './components/authentication/ForgotPassword';
 import UpdateProfile from './components/authentication/UpdateProfile';
-import PinDetail from './components/shashinterest/PinDetail';
-import PinUserDetail from './components/shashinterest/PinUserDetail';
 
 const App = () => {
 	const [pins, setPins] = useState([]);
-	// const limitSearch = 10;
 
 	const getPhotos = async (query, limitSearch) => {
 		try {
@@ -35,12 +34,7 @@ const App = () => {
 	const searchSubmit = (term) => {
 		getPhotos(term, 10).then((res) => {
 			let results = res.results;
-			//console.log(results);
 			let newPins = [...results, ...pins];
-			// random location of each pin
-			// newPins.sort((a, b) => {
-			// 	return 0.5 - Math.random();
-			// });
 			setPins(newPins);
 		});
 	};
@@ -84,7 +78,7 @@ const App = () => {
 				<Switch>
 					{/* Shashinterest */}
 					<Route exact path="/">
-						<Mainboard pins={pins} />
+						<Homeboard pins={pins} />
 					</Route>
 					<PrivateRoute exact path="/mypage" component={MyPage} />
 					<Route exact path="/explore" component={Explore} />

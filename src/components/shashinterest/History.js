@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
-import PinHistory from './PinHistory';
-import './Mainboard.css';
 import { useHistorySearch } from '../../hooks/useHistorySearch';
 import { useAuth } from '../../contexts/AuthContext';
+import PinHistory from './PinHistory';
+import './Homeboard.css';
 
 const History = ({ getPhotos }) => {
 	const [newPins, setNewPins] = useState([]);
@@ -98,11 +98,8 @@ const History = ({ getPhotos }) => {
 									return (
 										<PinHistory
 											key={uniqid()}
-											id={pin.id}
 											urls={pin.urls}
 											alt={pin.alt_description}
-											photographer={pin.user.name}
-											link={pin.links.html}
 										/>
 									);
 								})}
@@ -172,7 +169,4 @@ const ItemContainer = styled.div`
 	display: flex;
 	justify-content: flex-star;
 	height: 100%;
-	// column-gap: 0.6rem;
-	// height: 100%;
-	// margin-left: 1rem;
 `;

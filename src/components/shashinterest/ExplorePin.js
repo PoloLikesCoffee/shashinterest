@@ -35,7 +35,6 @@ const Container = styled.div`
 	height: 220px;
 
 	img {
-		opacity: 1;
 		display: flex;
 		width: 100%;
 		height: 100%;
@@ -43,7 +42,7 @@ const Container = styled.div`
 		cursor: pointer;
 		border-radius: 25px;
 		object-fit: cover;
-		filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
+		filter: brightness(60%);
 	}
 
 	.term {
@@ -54,6 +53,6 @@ const Container = styled.div`
 	}
 
 	:hover > img {
-		opacity: 0.7;
+		filter: brightness(40%) drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
 	}
 `;

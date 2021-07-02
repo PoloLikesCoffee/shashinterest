@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PinHistory = ({ urls, alt, photographer, link, id }) => {
+const PinHistory = ({ urls, alt }) => {
 	return (
 		<Wrapper>
 			<Container>
@@ -23,20 +23,13 @@ const Wrapper = styled.div`
 const Container = styled.div`
 	display: flex;
 	box-sizing: border-box;
-	// cursor: pointer;
 	width: 100px;
 
 	img {
-		opacity: 1;
 		display: flex;
 		width: 100%;
-		// cursor: pointer;
 		border-radius: 16px;
 		object-fit: cover;
-		filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.2));
+		filter: brightness(80%);
 	}
-
-	// :hover > img {
-	// 	opacity: 0.7;
-	// }
 `;
