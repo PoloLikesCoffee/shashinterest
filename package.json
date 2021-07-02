@@ -2,7 +2,7 @@
 	"name": "shashinterest",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://pololikescoffee.github.io/shashinterest",
+	"homepage": "https://myusername.github.io",
 	"dependencies": {
 		"@material-ui/core": "^4.11.4",
 		"@material-ui/icons": "^4.11.2",
@@ -23,7 +23,7 @@
 	},
 	"scripts": {
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build",
+		"deploy": "gh-pages -b master -d build",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
