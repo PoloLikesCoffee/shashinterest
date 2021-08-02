@@ -1,7 +1,7 @@
-# Project: Battleship
+# Project: Shashinterest
 
 **Goal**:
-Use everything I have learn to create a clone of my favorite website as part of The Odin Project.
+Use everything I have learnt to create a clone of my favorite website as part of The Odin Project.
 
 **Live Link**:
 👉 https://pololikescoffee.github.io/shashinterest/
